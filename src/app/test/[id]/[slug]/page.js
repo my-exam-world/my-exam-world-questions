@@ -1,4 +1,4 @@
-import { getQuestionBySlug } from '@/models/Test';
+import { getQuestionBySlug } from '@/models/test';
 import './QuestionPage.css';
 import Link from 'next/link';
 
