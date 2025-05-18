@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import siteMetadata from "../utils/siteMetaData";
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,9 +17,9 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
-  title: siteMetadata.title, 
+  title: siteMetadata.title,
   description: siteMetadata.description,
-  keywords : siteMetadata.keywords,
+  keywords: siteMetadata.keywords,
   authors: [{ name: siteMetadata.author, url: 'https://www.myexamworld.com' }],
   canonical: siteMetadata.siteUrl,
   openGraph: {
@@ -54,6 +56,8 @@ export default function RootLayout({ children }) {
         <Navbar />
 
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
