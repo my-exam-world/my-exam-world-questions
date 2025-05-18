@@ -1,0 +1,290 @@
+/* Main Navbar Styles */
+.mmexams-navbar {
+  background: linear-gradient(135deg, #0096c7, #00b4d8);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem 2rem;
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.mmexams-navbar-visible {
+  transform: translateY(0);
+}
+
+.mmexams-navbar-hidden {
+  transform: translateY(-100%);
+}
+
+.mmexams-navbar-container {
+  /* max-width: 1400px; */
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mmexams-navbar-brand-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 250px;
+}
+
+/* Branding Styles */
+.mmexams-navbar-brand {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  gap: 12px;
+}
+
+.mmexams-navbar-logo {
+  width: 45px;
+  height: auto;
+}
+
+.mmexams-navbar-brandtext {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.mmexams-navbar-brandtitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  white-space: nowrap;
+}
+
+.mmexams-navbar-brandsubtitle {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+}
+
+/* Toggle Button */
+.mmexams-navbar-toggler {
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  display: none;
+}
+
+/* Navigation Links */
+.mmexams-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.mmexams-navbar-main-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.mmexams-nav-link {
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 0.7rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.mmexams-nav-link:hover {
+  color: white;
+}
+
+/* Dropdown Styles */
+.mmexams-nav-dropdown {
+  position: relative;
+}
+
+.mmexams-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+}
+
+.mmexams-dropdown-content a {
+  color: #333;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.mmexams-dropdown-content a:hover {
+  background-color: #f1f1f1;
+  color: #0096c7;
+}
+
+.mmexams-nav-dropdown:hover .mmexams-dropdown-content {
+  display: block;
+}
+
+.dropdown-icon {
+  font-size: 0.7rem;
+  transition: transform 0.3s;
+}
+
+.mmexams-nav-dropdown:hover .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+/* Auth Buttons */
+.mmexams-navbar-auth-buttons {
+  display: flex;
+  gap: 0.8rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.mmexams-auth-button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.signin-btn {
+  color: white;
+  border: 1px solid white;
+}
+
+.signin-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.signup-btn {
+  background-color: #ffc107;
+  color: #000;
+  border: 1px solid #ffc107;
+}
+
+.signup-btn:hover {
+  background-color: #ffca28;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .mmexams-navbar-main-links {
+    gap: 0.7rem;
+  }
+  .mmexams-nav-link {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  .mmexams-auth-button {
+    padding: 0.5rem 0.8rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .mmexams-navbar-toggler {
+    display: block;
+  }
+  
+  .mmexams-navbar-links {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #0088b6, #0096c7);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    transform: translateY(-150%);
+    transition: transform 0.3s ease-out;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+  }
+  
+  .mmexams-navbar-links.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .mmexams-navbar-main-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  
+  .mmexams-nav-dropdown {
+    width: 100%;
+  }
+  
+  .mmexams-dropdown-content {
+    position: static;
+    display: none;
+    width: 100%;
+    box-shadow: none;
+    background-color: transparent;
+  }
+  
+  .mmexams-nav-dropdown:hover .mmexams-dropdown-content {
+    display: none;
+  }
+  
+  .mmexams-nav-dropdown.active .mmexams-dropdown-content {
+    display: block;
+    padding-left: 1rem;
+  }
+  
+  .mmexams-navbar-auth-buttons {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mmexams-navbar {
+    padding: 0.7rem 1rem;
+  }
+  
+  .mmexams-navbar-logo {
+    width: 40px;
+  }
+  
+  .mmexams-navbar-brandtitle {
+    font-size: 1.1rem;
+  }
+  
+  .mmexams-navbar-links {
+    top: 68px;
+  }
+}
