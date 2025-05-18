@@ -48,9 +48,9 @@ export default function Navbar() {
                 <div className={`mmexams-navbar-links ${isNavbarOpen ? 'show' : ''}`}>
                     <div className="mmexams-navbar-main-links">
                         <Link className="mmexams-nav-link" href="/" onClick={closeNavbar}>Home</Link>
-                        <Link className="mmexams-nav-link" href="https://www.myexamworld.com/alltest" >Exams</Link>
+                        <Link className="mmexams-nav-link" href="https://www.myexamworld.com/alltest" >All Exams</Link>
      
-                        <Link className="mmexams-nav-link" href="https://www.myexamworld.com/allcreators" >About</Link>
+                        <Link className="mmexams-nav-link" href="https://www.myexamworld.com/allcreators" >All Creators</Link>
                     </div>
 
                     <div className="mmexams-navbar-auth-buttons">
