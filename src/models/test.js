@@ -28,6 +28,29 @@ try {
   Test = mongoose.model('Test', testSchema);
 }
 
+// Helper function to prepare text for slug generation (same as in sitemap)
+const prepareSlugText = (html, maxLength = 60) => {
+  // Remove HTML tags
+  let text = html.replace(/<[^>]*>?/gm, '');
+  
+  // Replace multiple spaces/newlines with single space
+  text = text.replace(/\s+/g, ' ').trim();
+  
+  // Truncate if too long
+  if (text.length > maxLength) {
+    text = text.substring(0, maxLength);
+    // Don't cut words in middle - find last space
+    const lastSpace = text.lastIndexOf(' ');
+    if (lastSpace > 0) {
+      text = text.substring(0, lastSpace);
+    }
+    text = text + '...';
+  }
+  
+  return text;
+};
+
+
 // Helper function to create slug
 function createSlug(text) {
   return text.toLowerCase()
@@ -43,9 +66,12 @@ export async function getQuestionBySlug(testId, questionSlug) {
     const test = await Test.findById(testId).exec();
     if (!test) return null;
     const decodedSlug = decodeURIComponent(questionSlug);
-    const question = test.questions.find(q => 
+    const question = test.questions.find(q => {
+      const cleanText = prepareSlugText(q.questionText);
+      const currentSlug = slugify(cleanText).replace(/-+$/, '');
+      return currentSlug === decodedSlug
+    }
       
-      slugify(q.questionText).replace(/-+$/, '') === decodedSlug
     );
 
 

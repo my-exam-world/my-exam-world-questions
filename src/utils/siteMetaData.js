@@ -1,6 +1,6 @@
 // please update required information
 const siteMetadata = {
-    title: 'My Exam World - Online Examination Platform',
+    title: 'My Exam World',
     description: 'My Exam World is a multilingual online exam platform where educators can create and share exams, and students can take them from any device. Features include test series, live proctoring, performance analytics, and mobile-friendly design — all in one seamless portal',
     keywords: 'online exams, test preparation, teacher portal, student testing, exam creator',
     author: 'Sagar Makode',
