@@ -42,9 +42,10 @@ export async function getQuestionBySlug(testId, questionSlug) {
   try {
     const test = await Test.findById(testId).exec();
     if (!test) return null;
+    const decodedSlug = decodeURIComponent(questionSlug);
     const question = test.questions.find(q => 
       
-      slugify(q.questionText).replace(/-+$/, '') === questionSlug
+      slugify(q.questionText).replace(/-+$/, '') === decodedSlug
     );
 
 
