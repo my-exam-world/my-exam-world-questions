@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import siteMetadata from "../utils/siteMetaData";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,10 +49,20 @@ export const metadata = {
     images: [siteMetadata.socialBanner],
   },
 };
+const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_ID;
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+
+         <Script
+          id="adsense-script"
+          async
+          strategy="afterInteractive"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
+          crossOrigin="anonymous"
+        />
+
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Navbar />
 
