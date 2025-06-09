@@ -7,16 +7,16 @@ export async function generateMetadata({ params }) {
   const data = await getQuestionBySlug(id, slug);
   return {
     title: `${data?.questionText || 'Question'} | My Exam World`,
-    description: data?.correctAnswer.text 
+    description: data?.correctAnswer.text
       ? `Learn why ${data.correctAnswer.text} is the correct answer to this practice question`
       : 'Practice question with detailed explanation',
     alternates: {
-      canonical: `https://www.myexamworld.com/tests/${id}/${slug}`,
+      canonical: `https://www.myexamworld.com/test/${slug}/${id}`,
     },
     openGraph: {
       title: `${data?.testName || 'Test Question'} | My Exam World`,
       description: `Practice question from ${data?.testName || 'our test bank'}`,
-      url: `https://www.myexamworld.com/tests/${id}/${slug}`,
+      url: `https://www.myexamworld.com/test/${slug}/${id}`,
       type: 'article',
     },
   };
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }) {
 
 export default async function TestQuestionPage({ params }) {
   const { id, slug } = await params;
-  
+
   try {
     const data = await getQuestionBySlug(id, slug);
 
@@ -34,7 +34,7 @@ export default async function TestQuestionPage({ params }) {
           <article>
             <h1>Question not found</h1>
             <p>The requested question could not be located.</p>
-            <Link href="/tests" className="btn btn-primary">
+            <Link href="https://www.myexamworld.com/alltest" className="btn btn-primary">
               Browse Available Tests
             </Link>
           </article>
@@ -71,7 +71,7 @@ export default async function TestQuestionPage({ params }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        
+
         <main className="question-page">
           <article className="question-container">
             {/* Test Header */}
@@ -86,17 +86,18 @@ export default async function TestQuestionPage({ params }) {
             {/* Question Content */}
             <section aria-labelledby="question-heading">
               <h2 id="question-heading">Question {data.questionNumber}</h2>
-              
-              <p className="question-text">{data.questionText}</p>
 
+              <p
+                className="question-text"
+                dangerouslySetInnerHTML={{ __html: data.questionText }}
+              />
               {/* Options Grid */}
               <div className="options-grid" role="list">
                 {data.options.map((option, index) => (
-                  <div 
+                  <div
                     key={index}
-                    className={`option-item ${
-                      index === data.correctAnswer.index ? 'correct-answer' : ''
-                    }`}
+                    className={`option-item ${index === data.correctAnswer.index ? 'correct-answer' : ''
+                      }`}
                     role="listitem"
                   >
                     <span className="option-letter" aria-hidden="true">
@@ -121,8 +122,8 @@ export default async function TestQuestionPage({ params }) {
 
             {/* Action Buttons */}
             <footer className="action-buttons">
-              <Link 
-                href={`https://www.myexamworld.com/signin?redirect=/tests/${id}`}
+              <Link
+                href={`https://www.myexamworld.com/test/${slug}/${id}`}
                 className="btn btn-primary"
                 aria-label="Sign in to take the full test"
                 prefetch={false}
@@ -142,7 +143,7 @@ export default async function TestQuestionPage({ params }) {
         <article>
           <h1>Error loading question</h1>
           <p>Please try again later.</p>
-          <Link href="/tests" className="btn btn-primary">
+          <Link href="https://www.myexamworld.com/alltest" className="btn btn-primary">
             Browse Tests
           </Link>
         </article>
