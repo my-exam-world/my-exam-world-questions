@@ -63,32 +63,45 @@ export async function getQuestionBySlug(testId, questionSlug) {
   await dbConnect();
   
   try {
-    const test = await Test.findById(testId).exec();
+    // Only fetch the questions array and necessary fields
+    const test = await Test.findById(testId)
+      .select('questions testName totalMarks category correctAnswers')
+      .lean()
+      .exec();
+
     if (!test) return null;
+
     const decodedSlug = decodeURIComponent(questionSlug);
-    const question = test.questions.find(q => {
-      const cleanText = prepareSlugText(q.questionText);
+    let foundQuestion = null;
+    let answerIndex = -1;
+
+    // Optimized search - breaks when found
+    for (let i = 0; i < test.questions.length; i++) {
+      const q = test.questions[i];
+      const cleanText = q.questionText.replace(/<[^>]*>?/gm, '')
+                                     .replace(/\s+/g, ' ')
+                                     .trim()
+                                     .substring(0, 60);
       const currentSlug = slugify(cleanText).replace(/-+$/, '');
-      return currentSlug === decodedSlug
-    }
       
-    );
+      if (currentSlug === decodedSlug) {
+        foundQuestion = q;
+        answerIndex = test.correctAnswers[i];
+        break;
+      }
+    }
 
-
-    if (!question) return null;
-
-    const answerIndex = test.correctAnswers[question.questionNumber - 1];
-    const correctAnswer = question.options[answerIndex];
+    if (!foundQuestion) return null;
 
     return {
       testId: test._id,
       testName: test.testName,
-      questionNumber: question.questionNumber,
-      questionText: question.questionText,
-      options: question.options,
+      questionNumber: foundQuestion.questionNumber,
+      questionText: foundQuestion.questionText,
+      options: foundQuestion.options,
       correctAnswer: {
         index: answerIndex,
-        text: correctAnswer
+        text: foundQuestion.options[answerIndex]
       },
       totalMarks: test.totalMarks,
       category: test.category
