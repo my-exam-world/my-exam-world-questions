@@ -54,7 +54,7 @@ const prepareSlugText = (html, maxLength = 60) => {
       const slugText = prepareSlugText(question.questionText);
 
       fields.push({
-        loc: `${process.env.SITEMAP_URL}/test/${test._id}/${slugify(slugText).replace(/-+$/, '')}`,
+        loc: `${process.env.SITEMAP_URL}/test/${test._id}/${slugify(question.questionText).substring(0, 60)}`,
         lastmod: testLastMod,
         changefreq: 'weekly',
         priority: '0.9',

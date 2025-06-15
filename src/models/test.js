@@ -78,11 +78,7 @@ export async function getQuestionBySlug(testId, questionSlug) {
     // Optimized search - breaks when found
     for (let i = 0; i < test.questions.length; i++) {
       const q = test.questions[i];
-      const cleanText = q.questionText.replace(/<[^>]*>?/gm, '')
-                                     .replace(/\s+/g, ' ')
-                                     .trim()
-                                     .substring(0, 60);
-      const currentSlug = slugify(cleanText).replace(/-+$/, '');
+      const currentSlug =  slugify(q.questionText).substring(0, 60);
       
       if (currentSlug === decodedSlug) {
         foundQuestion = q;
