@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
       ? `Learn why "${data.correctAnswer.text.substring(0, 120)}" is the correct answer`
       : 'Practice question with detailed explanation',
     alternates: {
-      canonical: `https://questions.myexamworld.com/test/${id}/${slug}`,
+      canonical: `https://mcqs.myexamworld.com/test/${id}/${slug}`,
     },
     robots: {
       index: true,
@@ -22,12 +22,12 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: `${data?.testName || 'Test Question'} | My Exam World`,
       description: `Practice question from ${data?.testName || 'our test bank'}`,
-      url: `https://questions.myexamworld.com/test/${id}/${slug}`,
+      url: `https://mcqs.myexamworld.com/test/${id}/${slug}`,
       type: 'article',
       publishedTime: data?.createdAt || new Date().toISOString(),
       images: [
         {
-          url: 'https://questions.myexamworld.com/default-question-image.jpg',
+          url: 'https://mcqs.myexamworld.com/default-question-image.jpg',
           alt: 'My Exam World Practice Question',
         },
       ],
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title: `${data?.testName || 'Test Question'} | My Exam World`,
       description: `Practice question from ${data?.testName || 'our test bank'}`,
-      images: ['https://questions.myexamworld.com/default-question-image.jpg'],
+      images: ['https://mcqs.myexamworld.com/default-question-image.jpg'],
     },
   };
 }
@@ -84,7 +84,7 @@ export default async function TestQuestionPage({ params }) {
           "@type": "CommentAction",
           "handler": {
             "@type": "HttpActionHandler",
-            "url": `https://questions.myexamworld.com/test/${id}/${slug}`
+            "url": `https://mcqs.myexamworld.com/test/${id}/${slug}`
           }
         }
       },
@@ -93,7 +93,7 @@ export default async function TestQuestionPage({ params }) {
         "name": "My Exam World",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://questions.myexamworld.com/logo.png"
+          "url": "https://mcqs.myexamworld.com/logo.png"
         }
       }
     };
